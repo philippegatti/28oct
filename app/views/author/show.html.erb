@@ -1,6 +1,6 @@
 <div class="card">
-  <div class="card-header">
-    Author n°<%=params[:id]%>
+  <div class="card-header font-weight-bold">
+    Author #<%=params[:id]%>
   </div>
   <div class="card-body">
     <h5 class="card-title"><%= User.find(params[:id]).first_name%> <%= User.find(params[:id]).last_name%></h5>
@@ -27,7 +27,7 @@
 <div class="col-sm-4 mb-3">
 <div class="card">
   <div class="card-header">
-    Gossip n°<%=gossip.id%>
+    Gossip #<%=gossip.id%>
   </div>
   <div class="card-body align-center">
     <blockquote class="blockquote mb-0">

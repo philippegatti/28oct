@@ -1,6 +1,10 @@
 <div class="card">
   <div class="card-header">
-    Gossip n°<%=params[:id]%>
+    <div class="font-weight-bold">Gossip n°<%=params[:id]%></div>
+    <div class="text-muted"><%Gossip.find(params[:id]).tags.each do |item| %> 
+    	#<%=item.title%>
+    	<%end%>
+    	</div>
   </div>
   <div class="card-body">
     <h5 class="card-title"><%= Gossip.find(params[:id]).title%></h5>
