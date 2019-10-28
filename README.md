@@ -21,6 +21,7 @@ Go to the folder and run $ bundle install
 
 Active the migrations and run the seed :
 
+$ rails db:create
 $ rails db:migrate
 $ rails db:seed
 
