@@ -5,14 +5,14 @@
 
 Made for Ruby 2.5.1 Rails 5.2.3
 
-           							 PRESENTATION
+    PRESENTATION
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 The Gossip Project ("TGP") gathers the best gossips ever heard in THP.
 This the v1, you'll soon be able to create, edit, comment and like the gossips.
 
 
-										SET-UP
+	SET-UP
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 $ git clone https://github.com/philippegatti/28oct
@@ -24,8 +24,7 @@ Active the migrations and run the seed :
 $ rails db:migrate
 $ rails db:seed
 
-
-										RUNNING
+	RUNNING
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Launch your server :
