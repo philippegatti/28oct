@@ -5,9 +5,9 @@
       <%= "Votre Gossip a bien été enregistré" %>
   </div>
   <%end%>
+  <a class="btn btn-dark" <%= link_to "Soumettre un Gossip", new_gossip_path%></a>
   </div>
 </div>
-
 <section>
 <div class="card-deck">
 <%Gossip.all.each do |gossip|%>
