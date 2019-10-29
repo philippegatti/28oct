@@ -1,8 +1,11 @@
 <div class="card text-center mb-3">
   <div class="card-body">
-    <h5 class="card-title font-weight-bold">BIENVENUE <%=params[:id]%> !</h5>
-    <p class="card-text">Ici c'est notre super site de potins, il est chouette, non ?</p>
-    <a class="btn btn-dark" <%= link_to "Soumettre un Gossip", new_gossip_path%></a>  </div>
+  <% if @gossip !=nil%>
+  <div class="card bg-light text-dark font-weight-bold">
+      <%= "Votre Gossip a bien été enregistré" %>
+  </div>
+  <%end%>
+  </div>
 </div>
 
 <section>

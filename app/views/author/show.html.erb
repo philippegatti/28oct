@@ -35,7 +35,7 @@
       <footer class="blockquote-footer">
       <div class="row justify-content-between align-self-center mx-3">
       	<p><%=User.find(gossip.user_id).first_name%> <%=User.find(gossip.user_id).last_name%></p>
-      	<a class="btn btn-dark" <%= link_to "Voir", gossip_id_path(gossip.id)%></a>
+      	<a class="btn btn-dark" <%= link_to "Voir", gossip_path(gossip.id)%></a>
       </div>
       </footer>
     </blockquote>
