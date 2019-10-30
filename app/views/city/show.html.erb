@@ -1,11 +1,23 @@
-<div class="card text-center mb-3">
+<div class="card">
+  <div class="card-header font-weight-bold">
+    City #<%=params[:id]%>
+  </div>
   <div class="card-body">
-    <h5 class="card-title font-weight-bold">BIENVENUE <%=params[:id]%> !</h5>
-    <p class="card-text">Ici c'est notre super site de potins, il est chouette, non ?</p>
-    <a class="btn btn-dark" <%= link_to "Soumettre un Gossip", new_gossip_path%></a>
+    <h5 class="card-title"><%= @city.name%></h5>
+    <div class="card-text">
+		<p>ZIP Code : <%= @city.zip_code%></p>
+    </div>
   </div>
 </div>
-<section>
+
+<div class="card">
+  <div class="card-header mb-3">
+    <% if @gossips.size == 0 %>
+    <p> Il n'y a pas encore de gossip pour <%= @city.name%></p>
+    <% else %>
+    <p>Voici le(s) <%=@gossips.size%> gossip(s) écrit(s) à <%= @city.name%>:</p>
+    <%end%>
+   </div>
 <div class="card-deck">
 <%@gossips.each do |gossip|%>
 <div class="col-sm-4 mb-3">
@@ -28,4 +40,4 @@
 </div>
 <%end%>
 </div>
-</section>
+</div>

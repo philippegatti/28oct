@@ -7,6 +7,7 @@ class GossipController < ApplicationController
     anonymous.save
   	@gossip=Gossip.new(title: params[:gossip_title], content: params[:gossip_content], user_id: anonymous.id)
     if @gossip.save
+      @gossips=Gossip.all
       render 'index'
     else
       anonymous.destroy
@@ -15,9 +16,12 @@ class GossipController < ApplicationController
   end
 
   def show
+    @gossip=Gossip.find(params[:id])
+    @user=User.find(@gossip.user_id)
   end
 
   def index
+    @gossips=Gossip.all
   end
 
   def edit

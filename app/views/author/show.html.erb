@@ -3,27 +3,28 @@
     Author #<%=params[:id]%>
   </div>
   <div class="card-body">
-    <h5 class="card-title"><%= User.find(params[:id]).first_name%> <%= User.find(params[:id]).last_name%></h5>
+    <h5 class="card-title"><%= @user.first_name%> <%= @user.last_name%></h5>
     <div class="card-text">
-    	<p>email address : <%= User.find(params[:id]).email%></p>
-    	<p>Age : <%= User.find(params[:id]).age%></p>
-		<p>City : <%= User.find(params[:id]).city.name%></p>
-		<p>ZIP Code : <%= User.find(params[:id]).city.zip_code%></p>
-		<p>Membre depuis le : <%= User.find(params[:id]).created_at.to_date%></p>
+    	<p>email address : <%= @user.email%></p>
+    	<p>Age : <%= @user.age%></p>
+    	<p>Description : <%= @user.description%></p>
+		<p>City : <%= link_to "#{@user.city.name}", city_path(@user.city.id), :class =>"text-dark p-0"%></p>
+		<p>ZIP Code : <%= @user.city.zip_code%></p>
+		<p>Membre depuis le : <%= @user.created_at.to_date%></p>
     </div>
   </div>
 </div>
 
 <div class="card">
   <div class="card-header mb-3">
-    <% if Gossip.where(user_id:params[:id]).size == 0 %>
-    <p><%= User.find(params[:id]).first_name%> n'a pas encore écrit de gossip</p>
+    <% if @gossips.size == 0 %>
+    <p><%= @user.first_name%> n'a pas encore écrit de gossip</p>
     <% else %>
-    <p><%= User.find(params[:id]).first_name%> a écrit le(s) <%=Gossip.where(user_id:params[:id]).size%> gossip(s) suivant(s) :</p>
+    <p><%= @user.first_name%> a écrit le(s) <%=@gossips.size%> gossip(s) suivant(s) :</p>
     <%end%>
    </div>
 <div class="card-deck">
-<%Gossip.where(user_id:params[:id]).each do |gossip|%>
+<%@gossips.each do |gossip|%>
 <div class="col-sm-4 mb-3">
 <div class="card">
   <div class="card-header">
@@ -32,13 +33,13 @@
   <div class="card-body align-center">
     <blockquote class="blockquote mb-0">
       <p><%=gossip.title%></p>
-      <footer class="blockquote-footer">
-      <div class="row justify-content-between align-self-center mx-3">
-      	<p><%=User.find(gossip.user_id).first_name%> <%=User.find(gossip.user_id).last_name%></p>
-      	<a class="btn btn-dark" <%= link_to "Voir", gossip_path(gossip.id)%></a>
-      </div>
-      </footer>
     </blockquote>
+    <footer class="blockquote-footer">
+      <div class="row justify-content-between align-self-center mx-3">
+        <p><%= link_to "#{User.find(gossip.user_id).first_name} #{User.find(gossip.user_id).last_name}", author_path(gossip.user_id), :class =>"text-muted p-0"%></p>
+        <a class="btn btn-dark" <%= link_to "Voir", gossip_path(gossip.id)%></a>
+      </div>
+    </footer>
   </div>
 </div>
 </div>

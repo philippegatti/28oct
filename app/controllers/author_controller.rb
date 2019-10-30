@@ -1,16 +1,18 @@
 class AuthorController < ApplicationController
     def new
-  	Gossip.new
+  	User.new
   end
   def create
-  	Gossip.create
+  	User.create
   end
 
   def show
+    @user=User.find(params[:id])
+    @gossips=Gossip.where(user_id:params[:id])
   end
 
   def index
-    # Méthode qui récupère tous les potins et les envoie à la view index (index.html.erb) pour affichage
+    @users=User.all
   end
 
   def edit

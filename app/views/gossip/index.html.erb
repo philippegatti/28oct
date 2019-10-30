@@ -1,7 +1,7 @@
 <div class="card text-center mb-3">
   <div class="card-body">
   <% if @gossip !=nil%>
-  <div class="card bg-light text-dark font-weight-bold">
+  <div class="card bg-light text-dark font-weight-bold mb-3">
       <%= "Votre Gossip a bien été enregistré" %>
   </div>
   <%end%>
@@ -10,7 +10,7 @@
 </div>
 <section>
 <div class="card-deck">
-<%Gossip.all.each do |gossip|%>
+<%@gossips.each do |gossip|%>
 <div class="col-sm-4 mb-3">
 <div class="card">
   <div class="card-header">
@@ -19,13 +19,13 @@
   <div class="card-body align-center">
     <blockquote class="blockquote mb-0">
       <p><%=gossip.title%></p>
-      <footer class="blockquote-footer">
-      <div class="row justify-content-between align-self-center mx-3">
-      	<p><%=User.find(gossip.user_id).first_name%> <%=User.find(gossip.user_id).last_name%></p>
-      	<a class="btn btn-dark" <%= link_to "Voir", gossip_path(gossip.id)%></a>
-      </div>
-      </footer>
     </blockquote>
+    <footer class="blockquote-footer">
+      <div class="row justify-content-between align-self-center mx-3">
+        <p><%= link_to "#{User.find(gossip.user_id).first_name} #{User.find(gossip.user_id).last_name}", author_path(gossip.user_id), :class =>"text-muted p-0"%></p>
+        <a class="btn btn-dark" <%= link_to "Voir", gossip_path(gossip.id)%></a>
+      </div>
+    </footer>
   </div>
 </div>
 </div>

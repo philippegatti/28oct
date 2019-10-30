@@ -1,14 +1,15 @@
 <div class="card">
   <div class="card-header">
     <div class="font-weight-bold">Gossip n°<%=params[:id]%></div>
-    <div class="text-muted"><%Gossip.find(params[:id]).tags.each do |item| %> 
+    <div class="text-muted"><%@gossip.tags.each do |item| %> 
     	#<%=item.title%>
     	<%end%>
     	</div>
   </div>
   <div class="card-body">
-    <h5 class="card-title"><%= Gossip.find(params[:id]).title%></h5>
-    <p class="card-text"><%= Gossip.find(params[:id]).content%></p>
-    <a hclass="btn btn-dark"<%= link_to "#{User.find(Gossip.find(params[:id]).user_id).first_name} #{User.find(Gossip.find(params[:id]).user_id).last_name}", author_path(Gossip.find(params[:id]).user_id.to_i)%></a>
+    <h5 class="card-title"><%= @gossip.title%></h5>
+    <p class="card-text"><%= @gossip.content%></p>
+    <a hclass="btn btn-dark"<%= link_to "#{@user.first_name} #{@user.last_name}", author_path(@gossip.user_id.to_i), :class =>"text-dark p-0"%></a>
+    <div class="text-muted"><%= link_to "#{@user.city.name}", city_path(@user.city.id), :class =>"text-muted p-0"%></div>
   </div>
 </div>
