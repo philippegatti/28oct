@@ -22,8 +22,15 @@
     </blockquote>
     <footer class="blockquote-footer">
       <div class="row justify-content-between align-self-center mx-3">
+      <div class="row justify-content-between align-self-center mx-3">
         <p><%= link_to "#{User.find(gossip.user_id).first_name} #{User.find(gossip.user_id).last_name}", author_path(gossip.user_id), :class =>"text-muted p-0"%></p>
-        <a class="btn btn-dark" <%= link_to "Voir", gossip_path(gossip.id)%></a>
+      </div>
+      <div class="row justify-content-between align-self-center">
+        <a class="btn btn-dark mr-2" <%= link_to "Voir", gossip_path(gossip.id)%></a>
+        <button type="button" class="btn btn-light border-dark">
+          # <span class="badge badge-dark"><%=gossip.comments.size%></span>
+        </button>
+      </div>
       </div>
     </footer>
   </div>
