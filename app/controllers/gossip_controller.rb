@@ -16,9 +16,9 @@ class GossipController < ApplicationController
   end
 
   def show
-      @gossip=Gossip.find(params[:id])
-      @user=User.find(@gossip.user_id)
-      @comments=@gossip.comments
+    @gossip=Gossip.find(params[:id])
+    @user=User.find(@gossip.user_id)
+    @comments=@gossip.comments
   end
 
   def index
@@ -41,6 +41,6 @@ class GossipController < ApplicationController
     @gossip = Gossip.find(params[:id])
     @gossip.destroy
     @gossips=Gossip.all
-    render 'index'
+    render 'gossip/index'
   end
 end

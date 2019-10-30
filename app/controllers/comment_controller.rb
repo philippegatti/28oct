@@ -3,16 +3,14 @@ class CommentController < ApplicationController
 	  	Comment.new
 	end
   def create
-    anonymous=User.new(first_name:"Anonymous", last_name:"unknown",age: 99,description: "unknown",email:"unknown#{rand(1000)}@mail.com",city_id:City.all.sample.id)
-    anonymous.save
-  	@comment=Comment.new(content: params[:comment_content], user_id: anonymous.id, gossip_id: params[:gossip_id])
   	@gossip=Gossip.find(params[:gossip_id])
+    @comment=@gossip.comments.new(content: params[:comment_content], user_id: User.all.sample.id, gossip_id: params[:gossip_id])
   	@user=User.find(@gossip.user_id)
+  	@comments=@gossip.comments
   	if @comment.save
-      render 'gossip/show'
+      redirect_to gossip_path(@gossip.id)
     else
-      anonymous.destroy
-      render 'gossip/show'
+      redirect_to gossip_path(@gossip.id)
     end
   end
 
@@ -25,22 +23,24 @@ class CommentController < ApplicationController
   end
 
   def edit
-    @gossip=Gossip.find(params[:id])
+    @gossip=Gossip.find(params[:gossip_id])
+    @comment = @gossip.comments.find(params[:id])
   end
 
   def update
     @gossip = Gossip.find(params[:gossip_id])
-    if @gossip.update(title: params[:gossip_title], content: params[:gossip_content])
-      redirect_to @gossip
+    @comment = @gossip.comments.find(params[:id])
+    if @comment.update(content: params[:comment_content])
+      redirect_to gossip_path(@gossip)
     else
       render :edit
     end
   end
   def destroy
-    @gossip = Gossip.find(params[:id])
-    @gossip.destroy
-    @gossips=Gossip.all
-    render 'index'
+    @gossip = Gossip.find(params[:gossip_id])
+	@comment = @gossip.comments.find(params[:id])
+  	@comment.destroy
+    redirect_to gossip_path(@gossip)
   end
 
 end

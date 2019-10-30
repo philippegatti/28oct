@@ -1,0 +1,30 @@
+<html>
+<div class="card text-center mb-3">
+  <div class="card-body">
+  <body>
+  <% if @comment !=nil%>
+  <div class="card bg-light text-danger">
+      <% @comment.errors.each do |attr, msg|  %>
+      <%= attr %> <%= msg %>
+    <% end %>
+  </div>
+  <% end %>
+    <div class="container">
+      <h1> Corrige ce commentaire !</h1>
+      <%= form_tag gossip_comment_path(@gossip.id,@comment.id), action: 'update', method: "patch" do %>
+        <input type="hidden" name="authenticity_token" value= <%= form_authenticity_token %> >
+        <div class="row justify-content-center align-self-center mx-5">
+          <div class="col-3">
+            <%= label_tag 'Commentaire' %>
+          </div>
+          <div class="col-3">
+            <%= text_field_tag 'comment_content', value = @comment.content, options = {style:"height:120px;width:300px;vertical-align:text-top"}%>
+          </div>
+        </div>
+        <%= submit_tag "Valider", class: 'btn btn-dark btn-lg btn-submit'  %>
+      <% end %>
+    </div>
+  </body>
+</div>
+  </div>
+</html>
