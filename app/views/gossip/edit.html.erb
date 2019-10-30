@@ -1,0 +1,41 @@
+<html>
+<div class="card text-center mb-3">
+  <div class="card-body">
+  <body>
+  <% if @gossip !=nil%>
+  <div class="card bg-light text-danger">
+      <% @gossip.errors.each do |attr, msg|  %>
+      <%= attr %> <%= msg %>
+    <% end %>
+  </div>
+  <% end %>
+    <div class="container">
+      <h1> Corrige ce potin !</h1>
+      <%= form_tag url_for(action: 'update'), method: "patch" do %>
+        <input type="hidden" name="authenticity_token" value= <%= form_authenticity_token %> >
+        <br />
+        <div class="row justify-content-center align-self-center mx-5">
+          <div class="col-3">
+          <%= label_tag 'Le titre' %>
+          </div>
+          <div class="col-3">
+          <%= text_field_tag 'gossip_title', value = @gossip.title, options = {style:"height:30px;width:300px"} %>
+          </div>
+        </div>     
+        <br />
+        <div class="row justify-content-center align-self-center mx-5">
+          <div class="col-3">
+            <%= label_tag 'Dis nous tout' %>
+          </div>
+          <div class="col-3">
+            <%= text_field_tag 'gossip_content', value = @gossip.content, options = {style:"height:120px;width:300px;vertical-align:text-top"}%>
+          </div>
+        </div>
+        <br />
+        <%= submit_tag "Valider", class: 'btn btn-dark btn-lg btn-submit'  %>
+      <% end %>
+    </div>
+  </body>
+</div>
+  </div>
+</html>
