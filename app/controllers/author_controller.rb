@@ -1,9 +1,14 @@
 class AuthorController < ApplicationController
     def new
-  	User.new
-  end
+  	end
   def create
-  	User.create
+  	@user=User.new(last_name:params[:last_name], first_name:params[:first_name], email: params[:email], age:params[:age], description:params[:description], city_id:City.find_by(name: params[:city_name]).id, password: params[:password], password_confirmation: params[:password_confirmation])
+    if @user.save
+      @gossips=Gossip.where(user_id:@user.id)
+      render 'show'
+    else
+      render 'new'
+    end
   end
 
   def show
