@@ -31,5 +31,6 @@ class AuthorController < ApplicationController
   end
 
   def destroy
+    
   end
 end
