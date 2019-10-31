@@ -34,21 +34,21 @@
       <li class="nav-item">
         <a class="nav-link text-light" <%= link_to "Contact", contact_index_path%></a>
       </li>
-      <%if logged_in? %>
+      <%if current_user %>
         <li class="nav-item">
           <a class="nav-link text-light" <%= link_to "Balance un Gossip", new_gossip_path%></a>
         </li>
       <%end%>  
     </ul>
   </div>
-  <%if logged_in? %>
+  <%if current_user %>
     <div class="dropdown mr-5">
     <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <%=current_user.first_name%>
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <a class="dropdown-item" <%= link_to "Mon profil", author_path(current_user.id)%></a>
-      <a class="dropdown-item" <%= link_to "Se déconnecter", session_path(session.id), method: :delete %>
+      <a class="dropdown-item" <%= link_to "Se déconnecter", session_path(session.id), method: :delete %></a>
     </div>
   </div>
   <%else%>  
