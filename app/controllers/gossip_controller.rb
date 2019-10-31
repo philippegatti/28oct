@@ -1,18 +1,18 @@
 class GossipController < ApplicationController
+  include GossipHelper
+  before_action :authenticate_user, except: [:index, :show]
+  before_action :right_user, only: [:edit, :update, :destroy]
+
   def new
-  	Gossip.new
   end
   def create
-    anonymous=User.new(first_name:"Anonymous", last_name:"unknown",age: 99,description: "unknown",email:"unknown#{rand(1000)}@mail.com",city_id:City.all.sample.id)
-    anonymous.save
-  	@gossip=Gossip.new(title: params[:gossip_title], content: params[:gossip_content], user_id: anonymous.id)
-    if @gossip.save
-      @gossips=Gossip.all
-      render 'index'
-    else
-      anonymous.destroy
-      render 'new'
-    end
+      @gossip=Gossip.new(title: params[:gossip_title], content: params[:gossip_content], user_id: current_user.id)
+      if @gossip.save
+        @gossips=Gossip.all
+        render 'index'
+      else
+        render 'new'
+      end
   end
 
   def show
