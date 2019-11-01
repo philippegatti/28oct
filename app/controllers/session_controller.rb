@@ -1,11 +1,13 @@
 class SessionController < ApplicationController
+  include SessionHelper
 def new
 end
 
 def create
   user = User.find_by(email: params[:email])
   if user && user.authenticate(params[:password])
-    session[:user_id] = user.id
+    log_in(user)
+    remember(user)
     redirect_to welcome_path(user.first_name)
   else
     flash.now[:danger] = 'Invalid email/password combination'
@@ -14,7 +16,7 @@ def create
 end
 
 def destroy
-  session.delete(:user_id)
+  log_out(current_user)
   redirect_to welcome_index_path
 end
 end

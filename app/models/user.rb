@@ -15,4 +15,9 @@ class User < ApplicationRecord
   def already_liked(gossipid)
     self.likes.map{|like| like.gossip_id}.include?(gossipid)
   end
+
+   def remember(remember_token)
+    remember_digest = BCrypt::Password.create(remember_token)
+    self.update(remember_digest: remember_digest)
+  end
 end
