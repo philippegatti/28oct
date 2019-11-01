@@ -1,5 +1,7 @@
 require 'database_cleaner' #permet de réinitialiser la base à chaque relance du seed
 
+DatabaseCleaner.allow_production = true
+DatabaseCleaner.allow_remote_database_url = true
 DatabaseCleaner.strategy = :truncation
 DatabaseCleaner.clean
 
